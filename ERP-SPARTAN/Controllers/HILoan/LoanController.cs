@@ -150,7 +150,6 @@ namespace ERP_SPARTAN.Controllers
             return PartialView("_GetAmortizationPartial", _service.LoanService.GetAmortization(model));
         }
 
-
         [HttpGet]
         public async Task<IActionResult> Reclosing(Guid id, State stateDeb = State.All)
         {
@@ -204,8 +203,6 @@ namespace ERP_SPARTAN.Controllers
             ViewBag.reclosingId = id;
             return PartialView("_GetReclosingHistoryPartial", await _service.LoanService.GetReclosing(id));
         }
-
-
 
         [HttpGet]
         public IActionResult GetAmortizationReclosing(Loan model)
@@ -292,14 +289,12 @@ namespace ERP_SPARTAN.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
         [HttpGet]
         public async Task<IActionResult> GetAllSoldOut()
         {
             var result = await _service.LoanService.GetAllSoldOut(GetUserLoggedId());
-            return  PartialView("_GetAllSoldOutPartial", result);
+            return PartialView("_GetAllSoldOutPartial", result);
         }
-
 
         [HttpGet]
         public async Task<IActionResult> GetAllRenclosing()
@@ -318,6 +313,14 @@ namespace ERP_SPARTAN.Controllers
         {
             if (debId.IsEmpty()) return BadRequest();
             await _service.LoanService.RemoveNoteToDeb(debId);
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddNoteToLoan(Guid loanId, string note)
+        {
+            if (loanId.IsEmpty()) return BadRequest();
+            await _service.LoanService.AddNoteToLoan(loanId, note);
             return Ok();
         }
     }

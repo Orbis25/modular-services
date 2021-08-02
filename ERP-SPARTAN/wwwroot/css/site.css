@@ -272,3 +272,30 @@ body {
 }
 
 
+/**PULSE ANIMATION*/
+
+.btn-pulse {
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    background: #1976d2;
+    padding: 10px;
+    color: #fff;
+    cursor: pointer;
+    animation: shadow-pulse 1s 10;
+}
+
+.clickMeIcon {
+    font-size: 25px;
+    margin-left: 10px;
+}
+
+@keyframes shadow-pulse {
+    0% {
+        box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+    }
+
+    100% {
+        box-shadow: 0 0 0 35px rgba(0, 0, 0, 0);
+    }
+}

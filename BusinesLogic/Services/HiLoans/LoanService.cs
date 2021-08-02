@@ -711,5 +711,12 @@ namespace BusinesLogic.Services.HiLoans
             _dbContext.Debs.Update(deb);
             await CommitAsync();
         }
+
+        public async Task AddNoteToLoan(Guid loanId, string note)
+        {
+            var loan = await GetById(loanId);
+            loan.Note = note;
+            await Update(loan);
+        }
     }
 }

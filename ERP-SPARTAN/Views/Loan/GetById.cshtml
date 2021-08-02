@@ -226,6 +226,7 @@
                                             }
                                             @foreach (var item in Model.Debs)
                                             {
+                                                var pulseClass = !string.IsNullOrEmpty(item.Note) ? "btn-pulse" : string.Empty;
                                                 var bgClass = ((item.State == State.Payment) ? "ct-bg-success" : (item.State == State.Active && item.DateOfPayment < DateTime.Now ? "ct-bg-danger" : string.Empty));
                                                 var bgBtn = item.State == State.Payment ? "btn-danger" : "btn-success";
                                                 var btnText = item.State == State.Payment ? "Cancelar pago" : "Pagar cuota";
@@ -282,8 +283,12 @@
                                                                 }
                                                             }
 
-                                                            <button class="btn btn-sm btn-dark mt-2" onclick="OpenNoteOfDeb('@item.Id','@item.Note')">
+                                                            <button class="btn btn-sm btn-dark mt-2 @pulseClass" onclick="OpenNoteOfDeb('@item.Id','@item.Note')">
                                                                 <i class="fa fa-pencil-alt"></i>
+                                                                @if (!string.IsNullOrEmpty(item.Note))
+                                                                {
+                                                                    <span class="badge badge-danger">1</span>
+                                                                }
                                                             </button>
                                                         }
                                                         else

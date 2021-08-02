@@ -54,3 +54,39 @@ const postIsUpDate = (id) => {
         location.reload();
     });
 };
+
+
+/**
+ * Agrega una nota al prestamo
+ * @param {any} id id del prestamo
+ * @param {any} note nota
+ */
+const openNoteToLoan = (id, note) => {
+    let html = `<textarea class='form-control' placeholder='INGRESA UNA NOTA' id='noteloan'>${note}</textArea>`;
+
+    if (note !== "") {
+        html += `<div class='row mt-4'><div class='col-12'>
+                    <button onclick="addNoteToLoan('${id}')" class='btn btn-block btn-danger'>Eliminar nota</button>
+                </div></div>`;
+    }
+    Swal.fire({
+        title: "Nota",
+        html: html
+    }).then(({ value }) => {
+        const text = $('#noteloan').val();
+        if (value) {
+            addNoteToLoan(id, text);
+        }
+    });
+};
+
+
+const addNoteToLoan = (id, text = "") => {
+    fetch(`/loan/AddNoteToLoan?loanId=${id}&note=${text}`, { method: "POST" }).then((response) => {
+        if (response.ok) {
+            Swal.fire("Listo").then(() => location.reload());
+        } else {
+            Swal.fire("Error");
+        }
+    });
+};

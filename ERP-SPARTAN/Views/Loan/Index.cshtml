@@ -93,6 +93,7 @@
                                     <tbody>
                                         @foreach (var item in Model.Results)
                                         {
+                                            var pulseClass = !string.IsNullOrEmpty(item.Note) ? "btn-pulse" : string.Empty;
                                             <tr>
                                                 <td>
                                                     <input type="checkbox" id="@Guid.NewGuid()" onchange="postIsUpDate('@item.Id')" asp-for="@item.IsUpToDate" />
@@ -109,7 +110,14 @@
                                                 <td>@item.PaymentModality.GetDisplayName()</td>
                                                 <td>
                                                     <div>
-                                                        <a asp-action="GetById" asp-route-id="@item.Id" class="btn btn-success"><i class="far fa-eye text-white"></i></a>
+                                                        <a asp-action="GetById" asp-route-id="@item.Id" class="btn btn-success btn-sm"><i class="far fa-eye text-white"></i></a>
+                                                        <button class="btn btn-sm btn-dark @pulseClass" onclick="openNoteToLoan('@item.Id','@item.Note')">
+                                                            <i class="fa fa-pen"></i>
+                                                            @if (!string.IsNullOrEmpty(item.Note))
+                                                            {
+                                                                <span class="badge badge-danger">1</span>
+                                                            }
+                                                        </button>
                                                     </div>
                                                 </td>
                                             </tr>

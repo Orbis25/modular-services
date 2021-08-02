@@ -79,6 +79,13 @@ namespace BusinesLogic.Interfaces.HiLoans
         /// <param name="note"></param>
         /// <returns></returns>
         Task RemoveNoteToDeb(Guid debId);
+        /// <summary>
+        /// Agrega una nota al prestamo
+        /// </summary>
+        /// <param name="loanId"></param>
+        /// <param name="note"></param>
+        /// <returns></returns>
+        Task AddNoteToLoan(Guid loanId, string note);
 
     }
 }

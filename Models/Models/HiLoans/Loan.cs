@@ -54,6 +54,9 @@ namespace Models.Models.HiAccounting
         public decimal AmountDeb { get; set; }
         public bool IsUpToDate { get; set; } = false;
 
+        public string Note { get; set; }
+
+
         [NotMapped]
         public string SharesStr { get; set; }
         [Column(TypeName = "decimal(18,2)")]
